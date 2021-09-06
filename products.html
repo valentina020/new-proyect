@@ -14,10 +14,24 @@
     <link href="css/styles.css" rel="stylesheet">
     <script src="js/products.js"></script>
     
-    <!--Estilos de buscador para Entrega 2-->
+    <!--Estilos de buscador para Entrega 2 y precios de Entrega 1-->
     <style>
+      .row.justify-content-end {
+        width: auto;
+        position: relative;
+        top: -14px;
+        right: 20px;
+      }
+
+      .col.text-right {
+        width: auto;
+        position: relative;
+        top: -10px;
+        left: -606px;
+      }
+
       .realtime {
-        width: 400px;
+        width: 450px;
         position: relative;
         top: 50px;
         left: 20px;
@@ -56,14 +70,13 @@
           <div class="col text-right">
             <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
               <label class="btn btn-light active" id="sortAsc">
-                <input type="radio" name="options" autocomplete="off" checked>Menor a mayor
+                <input type="radio" name="options" autocomplete="off"><i class="fas fa-dollar-sign"></i> Menor a mayor
               </label>
               <label class="btn btn-light" id="sortDesc">
-                <input type="radio" name="options" autocomplete="off">Mayor a menor
+                <input type="radio" name="options" autocomplete="off"><i class="fas fa-dollar-sign"></i> Mayor a menor
               </label>
               <label class="btn btn-light" id="sortBySoldOuts">
-                <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-amount-down mr-1"></i>Relevancia
-              </label>
+                <input type="radio" name="options" autocomplete="off"> Mas vendidos<i class="fas fa-exclamation"></i>
             </div>
           </div>
         </div>
@@ -72,7 +85,7 @@
           <div class="col-md-6 col-sm-12 mb-1 container">
             <div class="row container p-0 m-0">
               <div class="col">
-                <p class="font-weight-normal text-right my-2">Precio</p>
+                <p class="font-weight-normal text-right my-2">Precio:</p>
               </div>
               <div class="col">
                 <input class="form-control" type="number" placeholder="min." id="rangeFilterCountMin">
@@ -83,13 +96,13 @@
               <div class="col-3 p-0">
                 <div class="btn-group" role="group">
                   <button class="btn btn-light btn-block" id="rangeFilterCount">Filtrar</button>
-                  <button class="btn btn-light btn-sm" id="clearRangeFilter">Limpiar</button>
+                  <button class="btn btn-outline-danger" id="clearRangeFilter">Limpiar</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div id="list-container"></div>
+        <div class="list-group" id="list-container"></div>
       </div>
 
   

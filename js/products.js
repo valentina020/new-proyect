@@ -100,7 +100,7 @@ function filtrarProductos() {
 //Orden por relevancia
 function relevancia(array) {
     let result = [];
-    result = array.sort(function(a, b) {
+    result = array.sort(function (a, b) {
         let aCount = parseInt(a.soldCount);
         let bCount = parseInt(b.soldCount);
         if (aCount > bCount)

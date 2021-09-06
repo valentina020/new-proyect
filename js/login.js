@@ -1,7 +1,7 @@
 function iniciar(){
     let usuario = document.getElementById("usuario").value;
-    let contraseña = document.getElementById("contraseña").value;
-    if((usuario !=="")&& (contraseña !=="")){
+    let password = document.getElementById("password").value;
+    if((usuario !=="")&& (password !=="")){
         window.location.href="./index.html";
     } 
     else{
@@ -17,10 +17,12 @@ function iniciar(){
 document.addEventListener("DOMContentLoaded", function(e){
     document.getElementById("iniciar").addEventListener("click", function() {
         iniciar();
-    });
-
-    var usuario = document.getElementById("usuario").value;
-    var contraseña = document.getElementById("contraseña").value;
-    array.push({usuario,contraseña});
+     
+    //Guardar valores en el localStorage
+    var usuariovalue = document.getElementById("usuario").value;
+    var passwordvalue = document.getElementById("password").value;
+    array.push({usuariovalue,passwordvalue});
     localStorage.setItem("login",JSON.stringify(array));
+ });
+
 });

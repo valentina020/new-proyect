@@ -1,124 +1,128 @@
 <!DOCTYPE html>
 <!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <title>eMercado - Todo lo que busques está aquí</title>
-  
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
-    <script src="js/products.js"></script>
-    
-    <!--Estilos de buscador para Entrega 2 y precios de Entrega 1-->
-    <style>
-      .row.justify-content-end {
-        width: auto;
-        position: relative;
-        top: -14px;
-        right: 20px;
-      }
 
-      .col.text-right {
-        width: auto;
-        position: relative;
-        top: -10px;
-        left: -606px;
-      }
-
-      .realtime {
-        width: 450px;
-        position: relative;
-        top: 50px;
-        left: 20px;
-      }
-
-      .price {
-        text-align: right;
-        font-size: x-large;
-      }
-    </style>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <title>eMercado - Todo lo que busques está aquí</title>
+  <link rel="shortcut icon" href="img/login.png">
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
 
 
-  </head>
+  <!--Entrega 1-->
+  <style>
+    .price {
+      text-align: right;
+      font-weight: bold;
+    }
+    .realtime {
+      width: 400px;
+      position:relative;
+      top: 50px;
+      left: 20px;
+    }
+  </style>
 
 
-  <body>
-    <nav class="site-header sticky-top py-1 bg-dark">
-      <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
-        <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
-        <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
-        <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-        <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+
+</head>
+
+<body>
+  <nav class="site-header sticky-top py-1 bg-dark">
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
+      <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
+      <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
+      <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
+      <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
+      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+      <a class="nav-link dropdown-toggle" href="#" id="navDropdown" role="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Bienvenid@
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" id="off" href="login.html">Cerrar sesion</a>
       </div>
-    </nav>
+    </div>
 
-      <div class="text-center p-4">
-          <h2>Productos</h2>
-          <p class="lead">Verás aquí todos los productos.</p>
+  </nav>
+  <div class="text-center p-4">
+    <h2>Productos</h2>
+    <p class="lead">Verás aquí todos los productos del sitio.</p>
+  </div>
+  <div class="container p-5">
+    <div class="row">
+      <div class="realtime">
+        <input type="search" id="buscador" class="form-control mb-3" placeholder="Buscador en tiempo real">
       </div>
-      <div class="container p-5">
-        <div class="row">
-          <div class="realtime">
-            <input type="search" id="buscar" class="form-control mb-3" placeholder="Buscador">
+      <div class="col text-right">
+        <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
+          <label class="btn btn-light active" id="sortAsc">
+            <input type="radio" name="options" autocomplete="off" checked>Menor a mayor
+          </label>
+          <label class="btn btn-light" id="sortDesc">
+            <input type="radio" name="options" autocomplete="off">Mayor a menor
+          </label>
+          <label class="btn btn-light" id="sortBySoldOuts">
+            <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-amount-down mr-1"></i>Relevancia
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-end">
+      <div class="col-md-6"></div>
+      <div class="col-md-6 col-sm-12 mb-1 container">
+        <div class="row container p-0 m-0">
+          <div class="col">
+            <p class="font-weight-normal text-right my-2">Precio:</p>
           </div>
-          <div class="col text-right">
-            <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
-              <label class="btn btn-light active" id="sortAsc">
-                <input type="radio" name="options" autocomplete="off"><i class="fas fa-dollar-sign"></i> Menor a mayor
-              </label>
-              <label class="btn btn-light" id="sortDesc">
-                <input type="radio" name="options" autocomplete="off"><i class="fas fa-dollar-sign"></i> Mayor a menor
-              </label>
-              <label class="btn btn-light" id="sortBySoldOuts">
-                <input type="radio" name="options" autocomplete="off"> Mas vendidos<i class="fas fa-exclamation"></i>
+          <div class="col">
+            <input class="form-control" type="number" placeholder="min." id="rangeFilterCountMin">
+          </div>
+          <div class="col">
+            <input class="form-control" type="number" placeholder="máx." id="rangeFilterCountMax">
+          </div>
+          <div class="col-3 p-0">
+            <div class="btn-group" role="group">
+              <button class="btn btn-light btn-block" id="rangeFilterCount">Filtrar</button>
+              <button class="btn btn-danger btn-sm" id="clearRangeFilter">Limpiar</button>
             </div>
           </div>
         </div>
-        <div class="row justify-content-end">
-          <div class="col-md-6"></div>
-          <div class="col-md-6 col-sm-12 mb-1 container">
-            <div class="row container p-0 m-0">
-              <div class="col">
-                <p class="font-weight-normal text-right my-2">Precio:</p>
-              </div>
-              <div class="col">
-                <input class="form-control" type="number" placeholder="min." id="rangeFilterCountMin">
-              </div>
-              <div class="col">
-                <input class="form-control" type="number" placeholder="máx." id="rangeFilterCountMax">
-              </div>
-              <div class="col-3 p-0">
-                <div class="btn-group" role="group">
-                  <button class="btn btn-light btn-block" id="rangeFilterCount">Filtrar</button>
-                  <button class="btn btn-outline-danger" id="clearRangeFilter">Limpiar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="list-group" id="list-container"></div>
       </div>
+    </div>
+    <div id="product-list-container"></div>
+  </div>
 
-  
-    <footer class="text-muted bg-light">
-      <div class="container">
-        <p class="float-right">
-          <a href="#">Volver arriba</a>
-        </p>
-        <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
-        <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
-      </div>
-    </footer>
-    <div id="spinner-wrapper"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/init.js"></script>
-    <script src="js/products.js"></script>
-  </body>
+  <footer class="text-muted bg-light">
+    <div class="container">
+      <p class="float-right">
+        <a href="#">Volver arriba</a>
+      </p>
+      <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
+      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+    </div>
+  </footer>
+  <div id="spinner-wrapper">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/off.js"></script>
+</body>
+
 </html>

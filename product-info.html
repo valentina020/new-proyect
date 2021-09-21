@@ -13,135 +13,7 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-  
-  <style>
-  
-    body {
-      background-color: rgb(214, 214, 214);
-    }
-
-    dl, dt{
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-    }
-
-    #product-title {
-      font-family: cursive;
-      font-size: x-larger;
-      text-align: center;
-    }
-
-    ul, li {
-      padding: 0;
-      margin: 0;
-      list-style: none;
-    }
-
-    ul.slider{
-      position: relative;
-      width: 799px;
-      height: 300px;
-    }
-
-    ul.slider li {
-      text-align: center;
-      opacity: 0;
-      width: 899px;
-      height: 295px;
-      transition: opacity .5s;
-      background:#fff;
-    }
-
-    ul.slider li img{
-     width: 150%;
-     height: 295px;
-     object-fit: cover;
-    }   
-
-    ul.slider li:first-child {
-      opacity: 1; /*Mostramos el primer <li>*/
-    }
-
-    #comments-section {
-     justify-content: center;
-     margin-top: 10px;
-    }
-
-    #comments-section h3 {
-      margin-left: 410px;
-    }
-
-    #coment-container {
-     width: 960px;
-     background-color: #f0f0f0a4;
-     border-radius: 5px;
-     margin-top: 10px
-    }
-
-
-    #form-input {
-     background-color: #f0f0f0;
-     text-align: center;
-     border-radius: 5px;
-     margin-top: -10px;
-     width: 960px;
-     height: 250px;
-     padding: 5px;
-    }
-
-    #form-input textarea {
-      justify-content: center;
-      resize: none;
-      margin-bottom: 5px;
-    }
-
-    #form-input h5 {
-      font-weight: bold;
-      color: #7c7074;
-      margin-left: 30px;
-      margin-bottom: -10px;
-      margin-top: 10px;
-    }
-
-    #form-input #star-rating {
-      float: right;
-      position: relative;
-      top: -15px;
-      width: 40px;
-      left: 9px;
-    }
-
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=number]::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      
-    }
-
-    #form-input #label {
-      float: right;
-      position: relative;
-      top: -15px;
-      width: 40px;
-      left: -110px;
-      font-weight: bold;
-      color: #7c7074;
-      line-height: 2em;
-    }
-
-    #form-input #submit {
-      margin-left: 30px;
-      background: #7c7074;
-      border-radius: 2px;
-      border: none;
-      width: 94%;
-      height: 40px;
-      cursor: pointer;
-      color: white;
-    }
-
-    #form-input #submit:hover {
-      background-color: #7c7074;
-    }
-  </style>
+  <link href="css/estilos.css" rel="stylesheet">
 </head>
 <body>
   <nav class="site-header sticky-top py-1 bg-dark">
@@ -150,13 +22,13 @@
       <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
       <a class="nav-link dropdown-toggle " href="#" id="navDropdown" role="button" data-toggle="dropdown" 
       aria-haspopup="true" aria-expanded="false">
       Bienvenid@
     </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+        <a class="dropdown-item" href="cart.html">Mi carrito</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" id="off" href="login.html">Cerrar sesion</a>
       </div>
@@ -198,10 +70,10 @@
         <p id="product-soldCount"></p>
       </dd>
     </dl>
-    <a type="button" class="btn btn-secondary btn-lg btn-block" href="products.html">Volver a la lista de productos</a>
     <br>
 
     <div id="comments-section">
+      <hr>
       <h3> <b> Testimonios </b></h3>
       <hr>
       <div id="form-input">
@@ -211,6 +83,47 @@
         <textarea name="comment" id="textarea" cols="100" rows="5"  placeholder="Deje aqui su comentario..."></textarea>
         <input id="submit" type="submit" value="Enviar">
         <hr>
+      </div>
+    </div>
+
+    <a type="button" class="btn btn-secondary btn-lg btn-block" href="products.html">Volver a la lista de productos</a>
+    <hr>
+    
+    <div class="container">
+      <h3 style="text-align: center;"><b>Productos Relacionados </b></h3> <br>
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="carousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carousel" data-slide-to="0" class="active"></li>
+              <li data-target="#carousel" data-slide-to="1"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <a href="product-info.html"> <img src="img/prod2.jpg" class="d-block w-100" alt="..." height="450px" width="9px"></a>
+                <div class="carousel-caption d-none d-md-block">
+                  <h5 style="font-weight: bolder;" >Fiat Way</h5>
+                  <p>La version de Fiat que brinda confort y un precio accesible.</p>      
+                </div>
+              </div>
+              <div class="carousel-item">
+                <a href="product-info.html"> <img src="img/prod3.jpg" class="d-block w-100" alt="..." height="450px" width="90px"></a>
+                <div class="carousel-caption d-none d-md-block">
+                  <h5 style="font-weight: bolder;">Suzuki Celerio</h5>
+                  <p>Un auto que se ha ganado la buena fama por su economia con el combustible.</p>      
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previo</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Siguiente</span>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>

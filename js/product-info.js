@@ -1,15 +1,11 @@
-//Atrapo todas las partes de mi pagina en las que voy a agregar informacion
 var productContainer = document.getElementById("product-container");
 var productTitle = document.getElementById("product-title");
 var productDescription = document.getElementById("product-description");
 var productCategory = document.getElementById("product-category");
 var productCost = document.getElementById("product-cost");
 var productSoldCount = document.getElementById("product-soldCount");
-var productImages = document.getElementById("product-images");
 var productComments = document.getElementById("comments-section");
 var commentSubmit = document.getElementById("submit");
-
-
 
 
 function showProductInfo() { //Muestro todos los datos
@@ -48,11 +44,6 @@ function showCommentsAndRatings() { //Muestro los comentarios
         }
     })
 }
-
-
-
-
-
 
 
 //Función que se ejecuta una vez que se haya lanzado el evento de

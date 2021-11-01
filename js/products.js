@@ -62,16 +62,17 @@ document.getElementById("rangeFilterCount").addEventListener("click", function (
 });
 
    document.getElementById("buscar").addEventListener('keyup', filtrarProductos); //Buscador
+
 });
 
 function filtrarProductos() {
-    const texto = document.getElementById("buscar").value;
-    const agregar = document.getElementById("list-container");
+    const texto = document.getElementById("buscar").value.toLowerCase();
+    const agregar = document.getElementById("row");
     agregar.innerHTML ='';
-    for (let producto of productsArray) {
-        let name = product.name;
-        let description = product.description;
-        if (nombre.indexOf(texto) !== -1 || description.indexOf(texto) !== -1) {
+    for (let product of productsArray) {
+        let name = product.name.toLowerCase();
+        let description = product.description.toLowerCase();
+        if (name.indexOf(texto) !== -1 || description.indexOf(texto) !== -1) {
             agregar.innerHTML += `
             <div class="list-group-item list-group-item-action">        
               <div class="row">                 
@@ -145,28 +146,20 @@ function showProductsList(array){
         if (((minCount == undefined) || (minCount != undefined && parseInt(product.cost) >= minCount)) &&
             ((maxCount == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxCount))) {
 
-               htmlContentToAppend += `  
-        <a href="category-info.html" class="list-group-item-action">       
-        <div class="list-group-item list-group-item-action">        
-            <div class="row">                 
-                <div class="col-3">                     
-                <img src="` + product.imgSrc + `" alt="` + product.description + `" class="img-thumbnail">                 
-                </div>                 
-                <div class="col">                     
-                     <div class="d-flex w-100 justify-content-between">                         
-                        <h4 class="mb-1">` + product.name + `</h4>                         
-                        <small class="text-muted">` + product.soldCount + ` artículos</small>                     
-                        </div>    
-                        <p class="text-muted">` + product.description + ` </p>
-                        <p class="mb-1 price">  `+ product.currency + `   ` + product.cost + `  </p>           
-                 
-                </div>             
-            </div>         
-        </div> 
-        </a>       
+            htmlContentToAppend += `  
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4">        
+            <a href="product-info.html" class="card mb-4 shadow-sm custom-card">
+              <img class="bd-placeholder-img card-img-top" src="${product.imgSrc}">
+              <h5 class="m-3"> <b>${product.name} (${product.soldCount})</b>  </h5>
+              <div class="card-body">
+                <p class="card-text">${product.description} <br>
+                <strong> ${product.currency} ${product.cost} </strong> </p>
+              </div>
+            </a>
+        </div>    
         `  
 
-           document.getElementById("list-container").innerHTML = htmlContentToAppend;
+           document.getElementById("row").innerHTML = htmlContentToAppend; 
         }
     }
 }

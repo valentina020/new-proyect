@@ -1,155 +1,144 @@
-//Función que se ejecuta una vez que se haya lanzado el evento de
-//que el documento se encuentra cargado, es decir, se encuentran todos los
-//elementos HTML presentes.
-document.addEventListener("DOMContentLoaded", function (e) {
-
-  let desafiate = "https://japdevdep.github.io/ecommerce-api/cart/654.json"
-  let valor = document.getElementsByClassName("cantidad");
-  let subtotalInd = document.getElementsByClassName("subtotal");
-  let subtotalCart = document.getElementsByClassName("subtotalCart");
-  let totalCart = document.getElementsByClassName("totalCart");
-  let tbody = document.getElementById("table-body");
-  let metodoDeEnvio = document.getElementsByClassName("form-check-input");
-  let metodoDePago = document.getElementsByClassName("pagoInput");
-  //Funcion principal
-  carrito(desafiate);
+let productosCarrito=[];
 
 
-  //Con esta funcion cambiamos los valores del carrito en tiempo real.
-  function cambiarValores(info) {
-    let array = [200, 500000]; 
-    let total = 0;
-    for (let i = 0; i < valor.length; i++) {
-      valor[i].addEventListener("keyup", (evento) => {
-        if (evento.key == "Backspace" || evento.key == "-" || evento.key == "+" || evento.key == "." || evento.key == ",") { 
-          subtotalInd[i].innerHTML = "$0";
-          valor[i].value = "";
-          array[i] = 0;
-        }
-        else {
-          if (info[i].currency == "USD") { 
-            subtotalInd[i].innerHTML = `$${valor[i].value * info[i].unitCost * 40}`;
-            array[i] = valor[i].value * info[i].unitCost * 40;
-          }
-          else { 
-            subtotalInd[i].innerHTML = `$${valor[i].value * info[i].unitCost}`;
-            array[i] = valor[i].value * info[i].unitCost;
-          }
-        }
-        total = array[0] + array[1];
-        subtotalCart[0].innerHTML = `$${total}`
-        totalCart[0].innerHTML = `$${total}`
-        //Actualizo subtotal y total.
-      })
+//Funcion que actualiza el subtotal cuando cambia la cantidad. 
+function subtotalProduct(precio, cantidad, subtotalId, tipoMoneda){
+
+    if (tipoMoneda == "USD")
+    {
+        document.getElementById(subtotalId).innerHTML = cantidad*precio * 43;
     }
-  }
 
-  //Mostrar carrito inicial con desafiate.
-  async function carrito(url) {
-    tbody.innerHTML = "";
-    let info = await getJSONData(url); //Hago una peticion a un JSON
-    info = info.data.articles; //Arreglo de objetos
-    let total = 0;
-    for (let i = 0; i < info.length; i++) {//Muestro todos los elementos.
-      let precioUnitario = info[i].unitCost;
-      let moneda = info[i].currency;
-      let cantidad = info[i].count;
-      let subtotal = precioUnitario * cantidad;
-      if (moneda == "USD") {
-        subtotal *= 40;
-        precioUnitario *= 40;
-      }
-      total += subtotal;
-      tbody.innerHTML += `<tr class= "product-row">
-        <td class="col-sm-8 col-md-6">
-          <div class="media">
-            <a class="thumbnail pull-left" href="#"> <img class="media-object"
-                src="${info[i].src}"
-                style="width: 72px; height: 72px; margin-right:10px;"> </a>
-            <div class="media-body">
-              <h4 class="media-heading"><a href="#">${info[i].name}</a></h4>
-              <h5 class="media-heading"> by <a href="#">Jap Ecommerce</a></h5>
-              <span>Estado: </span><span class="text-success"><strong>En Stock</strong></span>
-            </div>
-          </div>
-        </td>
-        <td class="col-sm-1 col-md-1" style="text-align: center">
-          <input type="number" min="0" class="form-control cantidad" value="${cantidad}">
-        </td>
-        <td class="col-sm-1 col-md-1 text-center"><strong>$${precioUnitario}</strong></td>
-        <td class="col-sm-1 col-md-1 text-center"><strong class="subtotal">$${subtotal}</strong></td>
-      </tr>`;
+    else
+    {
+        document.getElementById(subtotalId).innerHTML = cantidad*precio;
     }
-    tbody.innerHTML += `
-    <tr>
-      <td> <h5> Tipo de envio: </h5>  </td>
-      <td> <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
-      <label class="form-check-label" for="inlineRadio1"> <strong> Gold (13%) </strong></label>
-    </div>  </td>
-      <td> <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-      <label class="form-check-label" for="inlineRadio2"> <strong>Premium (7%) </strong></label>
-    </div> </td>
-      <td> <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" >
-      <label class="form-check-label" for="inlineRadio3"> <strong>Estandar (3%)</strong> </label>
-    </div></td>
-    </tr>
 
-    <tr>
-      <td> <h5> Metodo de pago: </h5>  </td>
-      <td> <div class="form-check form-check-inline">
-      <input class="pagoInput" type="radio" name="opcionPago" id="pagoInput1" value="option1" checked>
-      <label class="form-check-label" for="pagoInput1"> <strong> Paypal </strong></label>
-    </div>  </td>
-      <td> <div class="form-check form-check-inline">
-      <input class="pagoInput" type="radio" name="opcionPago" id="pagoInput2" value="option2">
-      <label class="form-check-label" for="pagoInput2"> <strong>Mastercard </strong></label>
-    </div> </td>
-      <td> <div class="form-check form-check-inline">
-      <input class="pagoInput" type="radio" name="opcionPago" id="pagoInput3" value="option3" >
-      <label class="form-check-label" for="pagoInput3"> <strong>Visa</strong> </label>
-    </div></td>
-    </tr>
+    precioFinal();
+    totalPrecio();
+}
+
+function total()
+{
+    let htmlToAppend = "";
+    htmlToAppend += `
+    <tr>    
+    <td></td>
+    <td class="align-middle"></td>
+    <td class="align-middle"></td>
+    <td class="align-middle"></td>
+    <td class="align-middle tabletext"><b>Total</b> <p id="total"> </p></td>
+    </tr>`
+
+
+    document.getElementById("carrito").innerHTML += htmlToAppend;
+}
+
+
+function carrito(){ //Muestra el carrito cargando elemento por elemento desde el JSON
+    let htmlToAppend = "";
+    let id = 0;
+    let subtotalPrice; 
     
+    for(let article of productosCarrito){ //Carga elementos
+
+        if (article.currency == "USD")
+            subtotalPrice = parseInt(article.unitCost) * parseInt(article.count) * 43; //Funciona para hacer el calculo del subtotal inicial para dolares
+        else 
+            subtotalPrice = parseInt(article.unitCost) * parseInt(article.count); //Funciona para hacer el calculo del subtotal inicial para pesos
     
-      <tr>
-        <td>   </td>
-        <td>   </td>
-        <td>   </td>
-        <td>
-          <h5>Subtotal</h5>
-        </td>
-        <td class="text-right">
-          <h5><strong class="subtotalCart"> $${total}</strong></h5>
-        </td>
-      </tr>
-      <tr>
-        <td>   </td>
-        <td>   </td>
-        <td>   </td>
-        <td>
-          <h3>Total</h3>
-        </td>
-        <td class="text-right">
-          <h3 ><strong class="totalCart">$${total}</strong></h3>
-        </td>
-      </tr>
-      <tr>
-        <td>   </td>
-        <td>   </td>
-        <td>   </td>
-        <td>   </td>
-        <td>
-          <button onclick="location.href='sell.html'" type="button" id="comprar" class="btn btn-success">
-            Comprar <span class="glyphicon glyphicon-play"></span>
-          </button>
-        </td>
-      </tr>`;
-    cambiarValores(info); //invoco a la funcion de cambiar valores en tiempo real
-  }
+        document.getElementById("precioTotalSubtotal").innerHTML = subtotalPrice;
+
+        htmlToAppend += `
+        <tr>
+        <td><img src="${article.src}" class = "img-fluid tabletext" style ="max-width:50px!important"></td>
+        <td class="align-middle tabletext">${article.name}</td>
+        <td class="align-middle tabletext">${article.currency} ${article.unitCost}</td>
+        <td class="align-middle tabletext"><input type="number" style="width: 50px;" min ="1" onchange="subtotalProduct(this.value, ${article.unitCost}, ${id}, '${article.currency}');" value=${article.count}></td>
+        <td class="subt align-middle tabletext" id="${id}">${subtotalPrice}</td>
+        </tr>`
+        id++;              
+                       
+       
+    }
+    document.getElementById("carrito").innerHTML += htmlToAppend;
+
+    precioFinal();
+    total(); //Muestra el total de los productos
+    totalPrecio(); //actualiza el precio total
+
+}
+
+function precioFinal() //Funcion que actualiza el precio final al final de la pag
+{
+    const envios = document.querySelectorAll('input[name="shippingType"]'); 
+            let selectedValue;
+            for (const envio of envios) { 
+                if (envio.checked) { //Se fija para cada tipo de envio si uno esta seleccionado y guarda su valor
+                    selectedValue = envio.value;
+                    break;
+                }
+            }
+
+    document.getElementById("precioEnvio").innerHTML = parseInt(document.getElementById("precioTotalSubtotal").innerHTML) * parseFloat(selectedValue); //calcula el añadido del tipo de envio
+    document.getElementById("precioTotalTotal").innerHTML = parseInt(document.getElementById("precioEnvio").innerHTML) + parseInt(document.getElementById("precioTotalSubtotal").innerHTML); //calcula el precio final
+
+}
+
+
+
+function getCarrito(url) {
+    
+    return fetch(url)
+    .then(respuesta=>{
+        return respuesta.json();
+    })
+    
+}
+
+function totalPrecio() {
+    let sum = 0;
+    let subtotals = document.getElementsByClassName("subt");
+
+    for (let sub of subtotals)
+    {
+        sum += parseInt(sub.innerHTML);
+    }
+
+    document.getElementById("total").innerHTML = sum;
+    document.getElementById("precioTotalSubtotal").innerHTML = sum;
+}
+
+
+
+document.addEventListener("DOMContentLoaded", function(e){
+    getCarrito("https://japdevdep.github.io/ecommerce-api/cart/654.json")
+    .then(respuesta=>{
+        productosCarrito = respuesta.articles; //Guarda los articulos del carrito en carrito
+        precioFinal();
+        carrito(); 
+    })
+})
+
+$('input[type=radio][name="shippingType"]').change(function() { 
+    precioFinal();
 });
+
+function validarFields() { //Funcion que sirve para saber si se puede hacer la compra
+     
+    let numberTarj = document.getElementById("tarjeta").value;
+    let fechaVenc = document.getElementById("fechaVenc").value;
+    let cvc = document.getElementById("cvc").value;
+    let metodoDeEnvio = document.getElementById("form-check-input").value;
+
+    if (numberTarj > 0 && fechaVenc > 0 && cvc > 0 && metodoDeEnvio > 0)
+        return true;
+    else {
+        alert ("Error: Complete todos los campos")
+          return false;
+    }
+}
+
 
 
 
